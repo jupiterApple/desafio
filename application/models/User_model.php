@@ -4,7 +4,13 @@ class User_model extends CI_model{
 
    public function register_user($user){
 
-      $this->db->insert('user', $user);
+      $this->db->insert('users', $user);
+
+      if (!$this->db->insert('users', $user)) {
+        return false;
+      }else{
+        return true;
+      }
    }
 
    public function list_users(){
@@ -19,12 +25,12 @@ class User_model extends CI_model{
       }
    }
 
-   public function login_user($email,$pass){
+   public function login_user($username,$password){
 
       $this->db->select('*');
       $this->db->from('users');
-      $this->db->where('username',$email);
-      $this->db->where('password',$pass);
+      $this->db->where('username',$username);
+      $this->db->where('password',$password);
 
       if($query=$this->db->get()){
          return $query->row_array();
@@ -32,11 +38,11 @@ class User_model extends CI_model{
         return false;
       }
    }
-   public function email_check($email){
+   public function email_check($username){
 
       $this->db->select('*');
       $this->db->from('users');
-      $this->db->where('email',$email);
+      $this->db->where('username',$username);
       $query=$this->db->get();
 
       if($query->num_rows()>0){

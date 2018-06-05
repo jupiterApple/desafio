@@ -57,7 +57,7 @@
             </div>
             <div class="login-footer">
                <div class="pull-left">
-                   &copy; 2017 R2CODE
+                   &copy; 2018 DESAFIO
                </div>
             </div>
          </div>

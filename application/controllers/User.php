@@ -45,6 +45,13 @@ class User extends CI_Controller {
 
    }
 
+   public function list(){
+
+     $this->load->view("users/list.php");
+
+   }
+
+
    function login_user(){
 
       $user = array(
@@ -63,7 +70,7 @@ class User extends CI_Controller {
          $this->load->view('users/profile.php');
 
       }else{
-         $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
+         $this->session->set_flashdata('error_msg', 'Usuário ou senha incorretos,tente novamente.');
          $this->load->view("users/login.php");
       }
    }

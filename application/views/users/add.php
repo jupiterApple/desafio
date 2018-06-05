@@ -8,15 +8,8 @@
     <title>Registration-CI Login Registration</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
-<style>
-  .container {
-    position: absolute;
-    top: 30%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    }
 
-  </style>
+
   </head>
   <body>
 
@@ -24,7 +17,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-4 col-md-offset-4">
-              <div class="login-panel panel panel-success">
+              <div class="login-panel panel panel-info">
                   <div class="panel-heading">
                       <h3 class="panel-title">Cadastro</h3>
                   </div>
@@ -37,7 +30,7 @@
                   }
                    ?>
 
-                      <form role="form" method="post" id="user_register" action="<?php echo base_url('user/register_user'); ?>">
+                      <form role="form" method="post" action="<?php echo base_url('user/register'); ?>">
                           <fieldset>
                               <div class="form-group">
                                   <input class="form-control" required placeholder="Nome" name="first_name" type="text" autofocus>
@@ -52,15 +45,13 @@
                               <div class="form-group">
                                   <input class="form-control" required placeholder="Senha" name="password" type="password" value="">
                               </div>
-
                               <input class="btn btn-lg btn-success btn-block" type="submit" value="Salvar" name="salvar" >
-
                           </fieldset>
                       </form>
                       <br>
-                       <form role="form" method="post" action="<?php echo base_url('user/login'); ?>">
-                          <input class="btn btn-lg btn-info btn-block" type="submit" value="Login" name="login" >
-                       </form>
+                      <form role="form" method="post" action="<?php echo base_url('user/list'); ?>">
+                          <input class="btn btn-lg btn-info btn-block" type="submit" value="voltar" name="voltar" >
+                      </form>
                   </div>
               </div>
           </div>

@@ -12,6 +12,9 @@
 
 <div class="container">
   <h2>Usúarios</h2>
+  <form role="form" method="post" id="user_login" action="<?php echo base_url('user/add'); ?>">
+		<button><i class="glyphicon glyphicon-plus"></i>Novo</button>
+	</form>
   <table class="table table-condensed">
     <thead>
       <tr>

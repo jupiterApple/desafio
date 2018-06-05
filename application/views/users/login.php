@@ -47,9 +47,6 @@
                      ?>
                       <div class="form-group">
                           <div class="col-md-6">
-                              <a href="#" class="btn btn-link btn-block">Esqueceu sua senha?</a>
-                          </div>
-                          <div class="col-md-6">
                               <button type="submit" id="logar" class="btn btn-info btn-block">Acessar</button>
                           </div>
                       </div>

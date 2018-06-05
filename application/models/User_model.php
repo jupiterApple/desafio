@@ -1,10 +1,7 @@
 <?php
 class User_model extends CI_model{
 
-
    public function register_user($user){
-
-      $this->db->insert('users', $user);
 
       if (!$this->db->insert('users', $user)) {
         return false;
@@ -38,6 +35,7 @@ class User_model extends CI_model{
         return false;
       }
    }
+
    public function email_check($username){
 
       $this->db->select('*');

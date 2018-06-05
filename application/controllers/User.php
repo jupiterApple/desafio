@@ -19,7 +19,7 @@ class User extends CI_Controller {
 
    public function register_user(){
 
-      $user=array(
+      $user = array(
          'first_name'=>$this->input->post('first_name'),
          'last_name'=>$this->input->post('last_name'),
          'username'=>$this->input->post('username'),
@@ -37,6 +37,33 @@ class User extends CI_Controller {
          $this->session->set_flashdata('error_msg', 'Erro ao registrar, tente novamente.');
          redirect('user');
       }
+   }
+
+   public function register(){
+
+      $user = array(
+         'first_name'=>$this->input->post('first_name'),
+         'last_name'=>$this->input->post('last_name'),
+         'username'=>$this->input->post('username'),
+         'password'=>md5($this->input->post('password'))
+        );
+
+      $email_check = $this->user_model->email_check($user['user_email']);
+
+      if($email_check){
+         if($this->user_model->register_user($user)){
+            $this->session->set_flashdata('success_msg', 'Registrado com sucesso');
+         }
+         redirect('user/list');
+      }else{
+         $this->session->set_flashdata('error_msg', 'Erro ao registrar, tente novamente.');
+         redirect('user');
+      }
+   }
+
+   public function add(){
+
+      $this->load->view("users/add.php");
    }
 
    public function login(){
@@ -75,10 +102,6 @@ class User extends CI_Controller {
       }
    }
 
-   // function profile(){
-
-   //    $this->load->view('profile.php');
-   // }
    public function user_logout(){
 
      $this->session->sess_destroy();

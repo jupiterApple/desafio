@@ -39,6 +39,10 @@ class User extends CI_Controller {
       }
    }
 
+   public function home(){
+      $this->load->view('users/profile.php');
+   }
+
    public function register(){
 
       $user = array(
@@ -61,7 +65,9 @@ class User extends CI_Controller {
       }
    }
 
-   public function add(){
+   public function add($id = null){
+
+      var_dump($_POST); exit(0);
 
       $this->load->view("users/add.php");
    }
@@ -74,8 +80,10 @@ class User extends CI_Controller {
 
    public function list(){
 
-     $this->load->view("users/list.php");
+      $data['users'] = (object) $this->user_model->list_users();
 
+
+     $this->load->view("users/list.php", $data);
    }
 
 

@@ -40,12 +40,14 @@ class User extends CI_Controller {
    }
 
    public function home(){
+
       $this->load->view('users/profile.php');
    }
 
    public function register(){
 
       $user = array(
+         'id'=>$this->input->post('id'),
          'first_name'=>$this->input->post('first_name'),
          'last_name'=>$this->input->post('last_name'),
          'username'=>$this->input->post('username'),
@@ -65,11 +67,17 @@ class User extends CI_Controller {
       }
    }
 
-   public function add($id = null){
+   public function remove(){
 
-      var_dump($_POST); exit(0);
+      $id = (int) $this->input->post('id');
 
-      $this->load->view("users/add.php");
+      if($this->user_model->delete($id)){
+         $this->session->set_flashdata('success_msg', 'Registrado com sucesso');
+      }else{
+         $this->session->set_flashdata('error_msg', 'Erro ao tentar excluir, tente novamente.');
+      }
+      // redirect($this->uri->uri_string());.
+      // redirect('/list', 'refresh');
    }
 
    public function login(){
@@ -84,6 +92,15 @@ class User extends CI_Controller {
 
 
      $this->load->view("users/list.php", $data);
+   }
+
+   public function add($id){
+
+      if($id){
+         $data['user'] = (object) $this->user_model->find_user($id);
+      }
+
+      $this->load->view("users/add.php", $data);
    }
 
 

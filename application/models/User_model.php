@@ -1,54 +1,89 @@
 <?php
 class User_model extends CI_model{
 
-   public function register_user($user){
+	 public function register_user($user){
 
-      if (!$this->db->insert('users', $user)) {
-        return false;
-      }else{
-        return true;
-      }
-   }
+	 	if(empty($user['id'])){
+	 		if (!$this->db->insert('users', $user)) {
+				return false;
+			}else{
+				return true;
+			}
+	 	}else{
 
-   public function list_users(){
+	 		$this->db->where('id', $user['id']);
+			if(!$this->db->update('users',$user)){
+				return false;
+			}else{
+				return true;
+			}
+	 	}
+	 }
 
-     $this->db->select('*');
-     $this->db->from('users');
+	 public function list_users(){
 
-      if($query=$this->db->get()){
-         return $query->result_array();
-      }else{
-         return false;
-      }
-   }
+		 $this->db->select('*');
+		 $this->db->from('users');
 
-   public function login_user($username,$password){
+			if($query=$this->db->get()){
+				 return $query->result_array();
+			}else{
+				 return false;
+			}
+	 }
 
-      $this->db->select('*');
-      $this->db->from('users');
-      $this->db->where('username',$username);
-      $this->db->where('password',$password);
+	 public function find_user($id){
 
-      if($query=$this->db->get()){
-         return $query->row_array();
-      }else{
-        return false;
-      }
-   }
+	 	$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$id);
 
-   public function email_check($username){
+		if($query=$this->db->get()){
+			 return $query->row_array();
+		}else{
+			return false;
+		}
 
-      $this->db->select('*');
-      $this->db->from('users');
-      $this->db->where('username',$username);
-      $query=$this->db->get();
+	 }
 
-      if($query->num_rows()>0){
-        return false;
-      }else{
-        return true;
-      }
-   }
+	 public function login_user($username,$password){
+
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('username',$username);
+			$this->db->where('password',$password);
+
+			if($query=$this->db->get()){
+				 return $query->row_array();
+			}else{
+				return false;
+			}
+	 }
+
+	 public function delete($id){
+
+		$delete = $this->db->delete('users', array('id' => $id));
+
+		if($delete){
+			return true;
+		}else{
+			return false;
+		}
+	 }
+
+	 public function email_check($username){
+
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('username',$username);
+			$query=$this->db->get();
+
+			if($query->num_rows()>0){
+				return false;
+			}else{
+				return true;
+			}
+	 }
 }
 
 

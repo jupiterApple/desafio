@@ -47,12 +47,12 @@
     <tbody>
  	<?php if(!empty($users)){
 		foreach($users as $i => $user){ ?>
-      <tr>
+      <tr data-id="">
         <td><?php echo $user['first_name']; ?></td>
         <td><?php echo $user['last_name']; ?></td>
         <td><?php echo $user['username']; ?></td>
-        <td class="text-center"><a id="editar_usuario"><span class="glyphicon glyphicon-pencil"></span></a></td>
-        <td class="text-center"><a id="excluir_usuario"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td class="text-center"><a><span data-id="<?php echo $user['id']; ?>" class="glyphicon glyphicon-pencil"></span></a></td>
+        <td class="text-center"><a><span data-id="<?php echo $user['id']; ?>" class="glyphicon glyphicon-remove"></span></a></td>
       </tr>
 	   <?php };
 	  }else{ ?>
@@ -64,15 +64,15 @@
   </table>
 </div>
 
-
 </body>
 </html>
 <script>
 	 $(document).ready(function(){
-		$('#excluir_usuario').on('click', function(){
-			var id = 'teste;'
+		$('.glyphicon-remove').on('click', function(){
+			var id = $(this).data("id");
+
 			$.ajax({
-				url: '<?= base_url(); ?>' + '/user/add',
+				url: '<?= base_url(); ?>' + '/user/remove',
 				type: 'POST',
 				dataType: 'json',
 				data: {
@@ -82,6 +82,12 @@
 
 				}
 		});
+	});
+
+		$('.glyphicon-pencil').on('click', function(){
+			var id = $(this).data("id");
+
+			window.location = '<?= base_url(); ?>' + 'user/add/'+id;
 	});
 });
 </script>

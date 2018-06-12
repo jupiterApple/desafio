@@ -103,19 +103,19 @@
       <div class="form-group">
         <label class="control-label col-sm-2" for="first_name">Nome:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" required placeholder="Digite o nome" name="first_name">
+          <input type="text" class="form-control" value="<?php echo $user->first_name ?>" required placeholder="Digite o nome" name="first_name">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="last_name">Sobrenome:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="last_name" placeholder="Digite o sobrenome" name="last_name">
+          <input type="text" class="form-control" id="last_name" value="<?php echo $user->last_name ?>" placeholder="Digite o sobrenome" name="last_name">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="username">Email: <b>( Login )</b></label>
         <div class="col-sm-10">
-          <input type="email" class="form-control" id="username" placeholder="Digite o email" name="username">
+          <input type="email" class="form-control" id="username" value="<?php echo $user->username ?>" placeholder="Digite o email" name="username">
         </div>
       </div>
       <div class="form-group">
@@ -126,13 +126,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label><input type="checkbox" name="remember"> Remember me</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+          <input name="id" type="hidden" value="<?php echo $user->id; ?>">
           <input class="btn btn-lg btn-success btn-block" type="submit" value="Salvar" name="salvar" >
         </div>
       </div>

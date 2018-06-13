@@ -76,8 +76,6 @@ class User extends CI_Controller {
       }else{
          $this->session->set_flashdata('error_msg', 'Erro ao tentar excluir, tente novamente.');
       }
-      // redirect($this->uri->uri_string());.
-      // redirect('/list', 'refresh');
    }
 
    public function login(){

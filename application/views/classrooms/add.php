@@ -35,35 +35,36 @@
 </nav>
 
   <div class="container">
-    <h2>Cadastrar Usuário</h2>
-    <form class="form-horizontal" method="post" action="<?php echo base_url('user/register'); ?>">
+    <h2>Cadastrar Sala</h2>
+    <?php
+            $success_msg= $this->session->flashdata('success_msg');
+            $error_msg= $this->session->flashdata('error_msg');
+
+            if($success_msg){
+         ?>
+               <span class="alert alert-success">
+                  <?php echo $success_msg; ?>
+               </span>
+         <?php
+            }
+            if($error_msg){
+         ?>
+               <span class="alert alert-danger">
+                  <?php echo $error_msg; ?>
+               </span>
+         <?php
+            }
+         ?>
+    <form class="form-horizontal" method="post" action="<?php echo base_url('classroom/register'); ?>">
       <div class="form-group">
-        <label class="control-label col-sm-2" for="first_name">Nome:</label>
+        <label class="control-label col-sm-2" for="nome">Nome:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" value="<?php echo $user->first_name ?>" required placeholder="Digite o nome" name="first_name">
+          <input type="text" class="form-control" value="<?php echo $classroom->name ?>" required placeholder="Digite o nome da sala" name="name">
         </div>
       </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="last_name">Sobrenome:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="last_name" value="<?php echo $user->last_name ?>" placeholder="Digite o sobrenome" name="last_name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="username">Email: <b>( Login )</b></label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="username" value="<?php echo $user->username ?>" placeholder="Digite o email" name="username">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="password">Senha:</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="pwd" placeholder="Digite a senha" name="password">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-4 pull-right">
-          <input name="id" type="hidden" value="<?php echo $user->id; ?>">
+      <div class="form-group col-sm-4 pull-right">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input name="id" type="hidden" value="<?php echo $classroom->id; ?>">
           <input class="btn btn-lg btn-success btn-block" type="submit" value="Salvar" name="salvar" >
         </div>
       </div>

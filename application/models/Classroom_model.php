@@ -5,6 +5,7 @@ class Classroom_model extends CI_model{
 
 		 $this->db->select('*');
 		 $this->db->from('classrooms');
+		 $this->db->join('classrooms_reservations', 'classrooms.id = classrooms_reservations.id_classroom');
 
 			if($query=$this->db->get()){
 				 return $query->result_array();

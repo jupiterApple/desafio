@@ -52,6 +52,20 @@ class ClassroomReservation extends CI_Controller {
          redirect('classroom/list');
       }
    }
+
+   public function reservation(){
+
+      $id = $this->input->post('id');
+
+      $update = $this->classroomReservation_model->update_reservation($id);
+      var_dump($update); exit(0);
+
+      if($update){
+         return true;
+      }else{
+         return false;
+      }
+   }
 }
 
 ?>

@@ -41,6 +41,8 @@
         <th width="10%" class="text-center">#</th>
         <th class="text-center">Nome</th>
         <th width="20%" class="text-center">Status</th>
+        <th width="20%" class="text-center">Horário</th>
+        <th width="10%" class="text-center">Reservar</th>
         <th width="10%" class="text-center" colspan="3">Ações</th>
       </tr>
     </thead>
@@ -58,9 +60,15 @@
         }
         ?>
         </td>
+        <td class="text-center"><?php echo $classroom['hour_reserved']; ?></td>
+        <?php if(date("H:i:s") > $classroom['hour_reserved'])
+        ($today = date("H:i:s"))
+
+
+        ?>
+        <td class="text-center"><input class="btn btn-lg btn-success btn-block reservar" id="reservar" data-id="<?php echo $classroom['id_reserva']; ?>" type="button" value="Reservar"></td>
         <td class="text-center"><a><span data-id="<?php echo $classroom['id']; ?>" class="glyphicon glyphicon-pencil"></span></a></td>
         <td class="text-center"><a><span data-id="<?php echo $classroom['id']; ?>" class="glyphicon glyphicon-remove"></span></a></td>
-        <td class="text-center"><a><span data-id="<?php echo $classroom['id']; ?>" data-name="<?php echo $classroom['name']; ?>" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-list-alt"></span></a></td>
       </tr>
 	   <?php };
 	  }else{ ?>
@@ -97,6 +105,7 @@
 </html>
 <script>
 	 $(document).ready(function(){
+
 		$('.glyphicon-remove').on('click', function(){
 			var id = $(this).data("id");
 
@@ -113,10 +122,22 @@
 		});
 	});
 
-		$('.glyphicon-pencil').on('click', function(){
+		$('#reservar').on('click', function(){
 			var id = $(this).data("id");
 
-			window.location = '<?= base_url(); ?>' + 'classroom/add/'+id;
+      $.ajax({
+        url: '<?= base_url(); ?>' + 'classroomReservation/reservation',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          id: id
+        },
+        success: function(msg){
+          alert('ok');
+        }
+      });
+
+			// window.location = '<?= base_url(); ?>' + 'classroom_reservation/reservation/'+id;
 	});
 
     $('.glyphicon-list-alt').on('click', function(){

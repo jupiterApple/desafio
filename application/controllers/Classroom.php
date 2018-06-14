@@ -20,17 +20,29 @@ class Classroom extends CI_Controller {
 
    public function list(){
 
-      $data['classrooms'] = (object) $this->classroom_model->list_classrooms();
+      $classrooms = $this->classroom_model->list_classrooms();
+
+      foreach ($classrooms as $key => $value) {
+
+         $hora = $classrooms[$key]['hour_reserved'];
+         $hora = date('H:i:s', strtotime($hora.'+1 hour'));
+
+          if(date('H:i:s') > $hora && $classrooms[$key]['status'] == false){
+            $classrooms[key]['status'] = true;
+            $update = $this->classroomReservation_model->update_reservation($classrooms[key]['id']);
+
+            if(!update){
+               $this->session->set_flashdata('error_msg', 'Não foi possível carregar a lista de salas, tente novamente.');
+            }
+         }
+      }
+
+      $data['classrooms'] = $classrooms;
 
      $this->load->view("classrooms/list.php", $data);
    }
 
    public function add($id){
-
-       // $times = $this->classroomReservation_model->get_hours_range(28800, 61200, 3600, 'H:i');
-
-       // var_dump($times); exit(0);
-
 
       if($id){
          $data['classroom'] = (object) $this->classroom_model->find_classroom($id);

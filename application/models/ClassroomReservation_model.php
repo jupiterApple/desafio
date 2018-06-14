@@ -23,5 +23,16 @@ class ClassroomReservation_model extends CI_model{
 			}
 	 	}
 	 }
+
+	 public function update_reservation($id){
+
+		$this->db->set('status', false);
+	 	$this->db->where('id_classroom', $id);
+		if(!$this->db->update('classrooms_reservations')){
+			return false;
+		}else{
+			return true;
+		}
+	 }
 }
 ?>
